@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "102885777579",
+    "firebase_url": "https://classroompr.firebaseio.com",
+    "project_id": "classroompr",
+    "storage_bucket": "classroompr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102885777579:android:42de8d55b50ffd7b",
+        "android_client_info": {
+          "package_name": "com.example.crdiggs.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102885777579-cub4skto148gps9knv0pij0jaknvmmcq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg7hKJE4xDCbTXk84yq4J-yEkAdTt3hsY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
