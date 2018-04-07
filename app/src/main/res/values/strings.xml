@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="request_code_token">"102885777579-cub4skto148gps9knv0pij0jaknvmmcq.apps.googleusercontent.com"</string>
+    <string name="title_activity_student_info">StudentInfo</string>
 </resources>
