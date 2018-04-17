@@ -2,4 +2,51 @@
     <string name="app_name">My Application</string>
     <string name="request_code_token">"102885777579-cub4skto148gps9knv0pij0jaknvmmcq.apps.googleusercontent.com"</string>
     <string name="title_activity_student_info">StudentInfo</string>
+    <string-array name="competency_1_subcompetencies">
+        <item>Select a subcompetency for (competency 1)</item>
+        <item>c1_s1</item>
+        <item>c1_s2</item>
+        <item>c1_s3</item>
+        <item>c1_s4</item>
+        <item>c1_s5</item>
+    </string-array>
+
+    <string-array name="competency_2_subcompetencies">
+        <item>Select a subcompetency (competency 2)</item>
+        <item>c2_s1</item>
+        <item>c2_s2</item>
+        <item>c2_s3</item>
+        <item>c2_s4</item>
+        <item>c2_s5</item>
+    </string-array>
+
+    <string-array name="competency_3_subcompetencies">
+        <item>Select a subcompetency (competency 3)</item>
+        <item>c1_s1</item>
+        <item>c1_s2</item>
+        <item>c1_s3</item>
+        <item>c1_s4</item>
+        <item>c1_s5</item>
+    </string-array>
+
+    <string-array name="operational_definition_1">
+        <item>Select an operational definition for (subcompetency 1)</item>
+        <item>s1_o1</item>
+        <item>s1_o2</item>
+        <item>s1_o3</item>
+    </string-array>
+
+    <string-array name="operational_definition_2">
+        <item>Select an operational definition for (subcompetency 2)</item>
+        <item>s2_o1</item>
+        <item>s2_o2</item>
+        <item>s2_o3</item>
+    </string-array>
+
+    <string-array name="operational_definition_3">
+        <item>Select an operational definition for (subcompetency 3)</item>
+        <item>s3_o1</item>
+        <item>s3_o2</item>
+        <item>s3_o3</item>
+    </string-array>
 </resources>
