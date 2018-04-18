@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -24,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity {
-    private static GoogleSignInClient mGoogleSignInClient;
+    private GoogleSignInClient mGoogleSignInClient;
     private final int REQ_CODE = 1;
     private final String TAG = "FirebaseAuth";
 
@@ -52,6 +51,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, REQ_CODE);
+        // Will go to 'onActivityResult' after activity is completed
     }
 
     @Override
@@ -108,31 +120,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, REQ_CODE);
-        // Will go to 'onActivityResult' after activity is completed
-    }
-
     private void updateUI(FirebaseUser user) {
         if(user != null) {
             Intent mainMenuIntent = new Intent(this, MainMenu.class);
             startActivity(mainMenuIntent);
-        }else{
-            // Error Code if needed.
         }
+
+        // Error code in else statement if needed
+
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-
-        if (account != null) {
-            // User is already signed in
-        } else {
-            // User is not already signed in
-        }
-    }
 }
