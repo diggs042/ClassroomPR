@@ -7,8 +7,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 
 public class StudentInfo extends AppCompatActivity {
+
+    Student student = new Student();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,11 +19,11 @@ public class StudentInfo extends AppCompatActivity {
         setContentView(R.layout.activity_student_info);
         Intent intent = getIntent();
         int studentCount = intent.getExtras().getInt("studentCount");
+        String studentName = ((EditText) findViewById(R.id.fragment)).getText().toString();
+        if (student != null)
+            student.setStudentName(studentName);
 
-
-
-        // design own mini xml file to contain 1 student entry, then use that ui element (fragment)
-        // just add stuff
+        //startActivity(next page intent)
     }
 
 }
