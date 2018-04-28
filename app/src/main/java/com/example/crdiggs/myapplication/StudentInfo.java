@@ -19,7 +19,7 @@ public class StudentInfo extends AppCompatActivity {
         setContentView(R.layout.activity_student_info);
         Intent intent = getIntent();
         int studentCount = intent.getExtras().getInt("studentCount");
-        String studentName = ((EditText) findViewById(R.id.fragment)).getText().toString();
+        String studentName = ((EditText) findViewById(R.id.grade_input)).getText().toString();
         if (student != null)
             student.setStudentName(studentName);
 
