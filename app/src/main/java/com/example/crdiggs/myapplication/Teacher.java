@@ -8,6 +8,8 @@ public class Teacher implements Serializable {
     private String school;
     private int grade;
     private int studentCount;
+    private boolean isAdmin;
+
 
     public Teacher(){
         // Empty Constructor for Firebase Implementation
@@ -48,4 +50,13 @@ public class Teacher implements Serializable {
     public String getTeacherName() {
         return teacherName;
     }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
 }

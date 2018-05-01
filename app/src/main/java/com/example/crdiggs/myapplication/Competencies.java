@@ -15,7 +15,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Iterator;
 
 public class Competencies extends AppCompatActivity {
     private DatabaseReference competenciesDatabase;
@@ -25,7 +24,7 @@ public class Competencies extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_competencies);
 
-        competenciesDatabase = FirebaseDatabase.getInstance().getReference("Competencies");
+        competenciesDatabase = FirebaseDatabase.getInstance().getReference(FirebaseHandler.COMPETENCY_REF);
         competenciesDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

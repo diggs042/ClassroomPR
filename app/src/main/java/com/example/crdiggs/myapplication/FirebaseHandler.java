@@ -13,7 +13,8 @@ import com.google.firebase.database.ValueEventListener;
 // Static Singleton Class - all static methods (can't make an instance of this class)
 public class FirebaseHandler {
 
-    private static final String TEACHER_REF = "teachers";
+    static final String TEACHER_REF = "teachers";
+    static final String COMPETENCY_REF = "Competencies";
 
     private static final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     
@@ -83,4 +84,17 @@ public class FirebaseHandler {
         }
     }
 
+    static String getUID() throws IllegalAccessException{
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser mUser = mAuth.getCurrentUser();
+        if(mUser != null){
+            return mUser.getUid();
+        }else {
+            throw new IllegalAccessException("User not authorized");
+        }
+    }
+
+    static DatabaseReference getRootRef() {
+        return rootRef;
+    }
 }

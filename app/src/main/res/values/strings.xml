@@ -2,6 +2,7 @@
     <string name="app_name">My Application</string>
     <string name="request_code_token">"102885777579-cub4skto148gps9knv0pij0jaknvmmcq.apps.googleusercontent.com"</string>
     <string name="title_activity_student_info">StudentInfo</string>
+    <string name="edit_competencies">Edit Competencies List</string>
     <string-array name="competency_1_subcompetencies">
         <item>Select a subcompetency for (competency 1)</item>
         <item>c1_s1</item>

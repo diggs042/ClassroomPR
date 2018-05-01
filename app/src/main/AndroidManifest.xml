@@ -22,9 +22,10 @@
             android:name=".StudentInfo"
             android:label="@string/title_activity_student_info"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Competencies">
-        </activity>
-        <activity android:name=".Subcompetencies"></activity>
+        <activity android:name=".Competencies" />
+        <activity android:name=".Subcompetencies" />
+        <activity android:name=".CompetencyList" />
+        <activity android:name=".EditCompetency"></activity>
     </application>
 
 </manifest>
