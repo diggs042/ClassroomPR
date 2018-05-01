@@ -61,7 +61,14 @@ public class EditCompetency extends AppCompatActivity {
                     subCompetency.setDefinitions(definitions);
                     subCompetencies.add(subCompetency);
                 }
-                subCompetencyRecycler.setAdapter(new CompetencyRecyclerAdapter(subCompetencies));
+                if(subCompetencies.size() > 0) {
+                    subCompetencyRecycler.setAdapter(new CompetencyRecyclerAdapter(subCompetencies));
+                }else{
+                    subCompetencyRecycler.setVisibility(View.GONE);
+                    TextView textView = findViewById(R.id.subcompetency_list_title);
+                    String s = "No Subcompetencies in this competency!";
+                    textView.setText(s);
+                }
             }
 
             @Override
@@ -114,8 +121,20 @@ public class EditCompetency extends AppCompatActivity {
             linearLayout.setGravity(Gravity.CENTER);
 
             for(String note: subCompetency.getDefinitions()){
+
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+
                 TextView noteView = new TextView(EditCompetency.this);
-                noteView.setText(note);
+                String in = "- " + note;
+                noteView.setText(in);
+
+                int leftValueInPx = (int) noteView.getContext().getResources().getDimension(R.dimen.dialog_text_start_margin);
+                params.setMargins(leftValueInPx, params.topMargin, params.rightMargin, params.bottomMargin);
+                noteView.setLayoutParams(params);
+
                 linearLayout.addView(noteView);
             }
 

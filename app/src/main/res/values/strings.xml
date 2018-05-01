@@ -3,6 +3,7 @@
     <string name="request_code_token">"102885777579-cub4skto148gps9knv0pij0jaknvmmcq.apps.googleusercontent.com"</string>
     <string name="title_activity_student_info">StudentInfo</string>
     <string name="edit_competencies">Edit Competencies List</string>
+    <string name="subcompetency_name">Subcompetency Name</string>
     <string-array name="competency_1_subcompetencies">
         <item>Select a subcompetency for (competency 1)</item>
         <item>c1_s1</item>
@@ -53,4 +54,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="opDef">Operational Definitions</string>
+    <string name="subcompetencies">Sub-Competencies</string>
+    <string name="add_subcomp">Add Subcompetency</string>
 </resources>
