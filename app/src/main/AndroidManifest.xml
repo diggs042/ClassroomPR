@@ -25,7 +25,7 @@
         <activity android:name=".Competencies" />
         <activity android:name=".Subcompetencies" />
         <activity android:name=".CompetencyList" />
-        <activity android:name=".EditCompetency"></activity>
+        <activity android:name=".EditCompetency" />
     </application>
 
 </manifest>

@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,9 +30,29 @@ public class EditCompetency extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_competency);
 
+        Button addSubCompetencyButton = findViewById(R.id.subcompetency_add_button);
+        addSubCompetencyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addSubCompetencyDialog().show();
+            }
+        });
+
         setSubCompetencyRecycler();
         loadDataIntoSubCompetencyRecycler();
+    }
 
+    AlertDialog addSubCompetencyDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(EditCompetency.this);
+
+        LayoutInflater inflater = LayoutInflater.from(EditCompetency.this);
+        View layout = inflater.inflate(R.layout.subcompetency_add_dialog, null);
+        builder.setView(layout);
+
+        builder.setTitle("Add Sub-Competency");
+        builder.setPositiveButton("Save!", null);
+
+        return builder.create();
     }
 
     void setSubCompetencyRecycler(){
@@ -146,7 +168,6 @@ public class EditCompetency extends AppCompatActivity {
         }
 
     }
-
 
 
     private class SubCompetencyViewHolder extends RecyclerView.ViewHolder{

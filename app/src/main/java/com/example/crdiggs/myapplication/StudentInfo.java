@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class StudentInfo extends AppCompatActivity {
 
@@ -19,11 +21,21 @@ public class StudentInfo extends AppCompatActivity {
         setContentView(R.layout.activity_student_info);
         Intent intent = getIntent();
         int studentCount = intent.getExtras().getInt("studentCount");
-        String studentName = ((EditText) findViewById(R.id.grade_input)).getText().toString();
-        if (student != null)
-            student.setStudentName(studentName);
 
         //startActivity(next page intent)
+
+        LinearLayout editTextLayout = findViewById(R.id.basic_layout);
+        for(int i = 0; i < studentCount; i++){
+            EditText editText = new EditText(StudentInfo.this);
+            editText.setHint("Student Name");
+            editTextLayout.addView(editText);
+
+        }
+
+        for(int i = 0; i < studentCount; i++){
+            EditText view = (EditText) editTextLayout.getChildAt(i);
+        }
+
     }
 
 }
