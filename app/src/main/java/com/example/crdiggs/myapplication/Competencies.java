@@ -25,8 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collections;
 
 
 public class Competencies extends AppCompatActivity {
@@ -40,25 +39,21 @@ public class Competencies extends AppCompatActivity {
         setContentView(R.layout.activity_competencies);
 
         // Set up UI elements
-        loadCompetetencies();
+        setSelectCompetenciesRecycler();
         setContinueButton();
 
     }
 
+    // Custom RecyclerView.Adapter to handle our custom ViewHolder
     public class CompetenciesRecyclerViewAdapter extends RecyclerView.Adapter<CompetenciesRecyclerViewAdapter.ViewHolder> {
 
         private static final String TAG = "RecyclerViewAdapter";
         private ArrayList<String> mSelectedCompetencies;
-        private ArrayList<String> mUnselectedCompetencies;
-        private int numCompetencies;
         private Context mContext;
 
         public CompetenciesRecyclerViewAdapter(Context mContext) {
             this.mSelectedCompetencies = new ArrayList<String>();
-            this.mSelectedCompetencies.add(competencies.get(0));
-            Log.wtf(TAG, competencies.get(0));
-            this.mUnselectedCompetencies = new ArrayList<String>(competencies);
-            this.numCompetencies = 1;
+            this.mSelectedCompetencies.add(competencies.get(0)); // Default to select first in competency list
             this.mContext = mContext;
         }
 
@@ -73,6 +68,8 @@ public class Competencies extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
             Log.d(TAG, "onBindViewHolder: called.");
+
+            // Setup UI elements within each ViewHolder
             setViewHolderSpinner(holder, position);
             setViewHolderAddButton(holder, position);
             setViewHolderDeleteButton(holder, position);
@@ -80,14 +77,12 @@ public class Competencies extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            Log.d(TAG, "size: called.");
-            return numCompetencies;
+            return mSelectedCompetencies.size();
         }
 
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             private String selectedCompetency;
-            private String previousSelectedCompetency;
             private ConstraintLayout parentLayout;
             private Spinner selectCompetencySpinner;
             private FloatingActionButton addSelectCompetencyButton;
@@ -98,45 +93,91 @@ public class Competencies extends AppCompatActivity {
                 selectCompetencySpinner = (Spinner)itemView.findViewById(R.id.select_competency_spinner);
                 addSelectCompetencyButton = (FloatingActionButton)itemView.findViewById(R.id.add_select_competency_button);
                 deleteSelectCompetencyButton = (FloatingActionButton)itemView.findViewById(R.id.delete_select_competency_button);
-                if (selectCompetencySpinner.getSelectedItem() != null) {
-                    previousSelectedCompetency = selectedCompetency;
-                    selectedCompetency = selectCompetencySpinner.getSelectedItem().toString();
-                }
             }
         }
 
-        private void setViewHolderSpinner(final ViewHolder holder, int position) {
-            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, mUnselectedCompetencies);
+        private void setViewHolderSpinner(final ViewHolder holder, final int position) {
+            Log.d(TAG, "setViewHolderSpinner: called, position = " + Integer.toString(position));
+            holder.selectedCompetency = mSelectedCompetencies.get(position);
+
+            // Create a new list for possible competency options for this particular holder
+            ArrayList<String> competencyOptionsSelectable = new ArrayList<String>();
+            competencyOptionsSelectable.add(holder.selectedCompetency); // Always show currently selected competency at top of dropdown list
+            ArrayList<String> unselectedCompetencies = new ArrayList<String>(competencies);
+            unselectedCompetencies.removeAll(mSelectedCompetencies);
+            Collections.sort(unselectedCompetencies, String.CASE_INSENSITIVE_ORDER);  // Show unselected competencies alphabetically for the rest of the dropdown options
+            competencyOptionsSelectable.addAll(unselectedCompetencies);
+
+            // Create an adapter and add competency options to spinner dropdown
+            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, competencyOptionsSelectable);
             spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             holder.selectCompetencySpinner.setAdapter(spinnerArrayAdapter);
+
+            // Define behavior when an old competency is replaced by a newly selected one
+            holder.selectCompetencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    Log.d(TAG, "onItemSelected: called, position = " + Integer.toString(i));
+                    String selectedCompetency = adapterView.getItemAtPosition(i).toString();
+                    if (selectedCompetency == holder.selectedCompetency) {
+                        /*
+                        This if-block prevents an infinite recursion.
+                        onItemSelected is called when choosing the default selection
+                        when the activity starts. If we call notifyDataSetChanged() here,
+                        setViewHolderSpinner will be called, which does a default onItemSelected,
+                        which will call notifyDataSetChanged() here, so setViewHolderSpinner will
+                        be called...and so on...
+
+                        Basically, we want to ignore the case in which the selected competency is
+                        the same as before.
+                         */
+                        return;
+                    } else {
+                        mSelectedCompetencies.set(position, selectedCompetency);
+                        notifyDataSetChanged();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                    Log.d(TAG, "onNothingSelected: called");
+                }
+            });
         }
 
         private void setViewHolderAddButton(final ViewHolder holder, int position) {
-            if (position == 0) {
-                holder.deleteSelectCompetencyButton.setVisibility(View.GONE);
+
+            // Make add button only visible on last ViewHolder, unless all possible competencies are selected
+            if (position != mSelectedCompetencies.size() - 1 || position == competencies.size() - 1) {
+                holder.addSelectCompetencyButton.setVisibility(View.GONE);
             } else {
-                holder.deleteSelectCompetencyButton.setVisibility(View.VISIBLE);
+                holder.addSelectCompetencyButton.setVisibility(View.VISIBLE);
             }
+
+            // Make the next selection spinner default selection to be the second (index 1) in the list of selectable options
             holder.addSelectCompetencyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    holder.addSelectCompetencyButton.setVisibility(View.GONE);
-                    numCompetencies++;
+                    mSelectedCompetencies.add(holder.selectCompetencySpinner.getItemAtPosition(1).toString());
                     notifyDataSetChanged();
                 }
             });
         }
 
         private void setViewHolderDeleteButton(final ViewHolder holder, int position) {
-            if (position != numCompetencies-1) {
-                holder.addSelectCompetencyButton.setVisibility(View.GONE);
+
+            // Make delete button only visible on all but first ViewHolder
+            if (position == 0) {
+                holder.deleteSelectCompetencyButton.setVisibility(View.GONE);
             } else {
-                holder.addSelectCompetencyButton.setVisibility(View.VISIBLE);
+                holder.deleteSelectCompetencyButton.setVisibility(View.VISIBLE);
             }
+
+            // Remove the selected competency in this ViewHolder from the list of selected competencies
             holder.deleteSelectCompetencyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    numCompetencies--;
+                    mSelectedCompetencies.remove(holder.selectCompetencySpinner.getSelectedItem());
                     notifyDataSetChanged();
                 }
             });
@@ -144,14 +185,11 @@ public class Competencies extends AppCompatActivity {
     }
 
     private void setSelectCompetenciesRecycler() {
-        selectCompetenciesRecycler = findViewById(R.id.select_competencies_recycler);
-        CompetenciesRecyclerViewAdapter competenciesRecyclerViewAdapter = new CompetenciesRecyclerViewAdapter(this);
-        selectCompetenciesRecycler.setAdapter(competenciesRecyclerViewAdapter);
-        selectCompetenciesRecycler.setLayoutManager(new LinearLayoutManager(this));
-    }
 
-    private void loadCompetetencies() {
+        // Connect to online instance of competencies data
         competenciesDatabase = FirebaseDatabase.getInstance().getReference(FirebaseHandler.COMPETENCY_REF);
+
+        // Retrieve data once
         competenciesDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -159,7 +197,13 @@ public class Competencies extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     competencies.add(ds.getKey());
                 }
-                setSelectCompetenciesRecycler();
+                Collections.sort(competencies, String.CASE_INSENSITIVE_ORDER);
+
+                // We must have the competencies list loaded before we can set the view adapter
+                selectCompetenciesRecycler = findViewById(R.id.select_competencies_recycler);
+                CompetenciesRecyclerViewAdapter competenciesRecyclerViewAdapter = new CompetenciesRecyclerViewAdapter(Competencies.this);
+                selectCompetenciesRecycler.setAdapter(competenciesRecyclerViewAdapter);
+                selectCompetenciesRecycler.setLayoutManager(new LinearLayoutManager(Competencies.this));
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
