@@ -1,4 +1,4 @@
-package com.example.crdiggs.myapplication;
+package com.example.crdiggs.myapplication.Models;
 
 public class Student {
     private String studentName;

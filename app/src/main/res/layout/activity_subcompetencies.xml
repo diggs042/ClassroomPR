@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Subcompetencies">
+    tools:context=".Activities.Subcompetencies">
 
     <Spinner
         android:id="@+id/competency_1_spinner"

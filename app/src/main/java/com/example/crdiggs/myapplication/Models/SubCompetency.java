@@ -1,4 +1,4 @@
-package com.example.crdiggs.myapplication;
+package com.example.crdiggs.myapplication.Models;
 
 import java.io.Serializable;
 import java.util.ArrayList;

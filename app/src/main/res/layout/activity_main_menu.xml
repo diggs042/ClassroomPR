@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.crdiggs.myapplication.MainMenu">
+    tools:context="com.example.crdiggs.myapplication.Activities.MainMenu">
 
     <Button
         android:id="@+id/start_plan_button"

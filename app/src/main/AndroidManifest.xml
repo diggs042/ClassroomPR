@@ -9,23 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainMenu" />
-        <activity android:name=".TeacherInfo" />
+        <activity android:name=".Activities.MainMenu" />
+        <activity android:name=".Activities.TeacherInfo" />
         <activity
-            android:name=".StudentInfo"
+            android:name=".Activities.StudentInfo"
             android:label="@string/title_activity_student_info"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Competencies" />
-        <activity android:name=".Subcompetencies" />
-        <activity android:name=".CompetencyList" />
-        <activity android:name=".EditCompetency" />
+        <activity android:name=".Activities.Competencies" />
+        <activity android:name=".Activities.Subcompetencies" />
+        <activity android:name=".Activities.CompetencyList" />
+        <activity android:name=".Activities.EditCompetency" />
     </application>
 
 </manifest>

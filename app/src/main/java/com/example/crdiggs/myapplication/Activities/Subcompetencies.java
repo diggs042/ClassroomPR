@@ -1,9 +1,11 @@
-package com.example.crdiggs.myapplication;
+package com.example.crdiggs.myapplication.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import com.example.crdiggs.myapplication.R;
 
 public class Subcompetencies extends AppCompatActivity {
 

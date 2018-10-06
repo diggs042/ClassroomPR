@@ -1,4 +1,4 @@
-package com.example.crdiggs.myapplication;
+package com.example.crdiggs.myapplication.Models;
 
 import java.io.Serializable;
 
@@ -15,7 +15,7 @@ public class Teacher implements Serializable {
         // Empty Constructor for Firebase Implementation
     }
 
-    Teacher(String teacherName){
+    public Teacher(String teacherName){
         this.teacherName = teacherName;
     }
 

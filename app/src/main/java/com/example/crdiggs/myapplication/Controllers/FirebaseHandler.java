@@ -1,7 +1,8 @@
-package com.example.crdiggs.myapplication;
+package com.example.crdiggs.myapplication.Controllers;
 
 import android.util.Log;
 
+import com.example.crdiggs.myapplication.Models.Teacher;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -13,8 +14,8 @@ import com.google.firebase.database.ValueEventListener;
 // Static Singleton Class - all static methods (can't make an instance of this class)
 public class FirebaseHandler {
 
-    static final String TEACHER_REF = "teachers";
-    static final String COMPETENCY_REF = "Competencies";
+    public static final String TEACHER_REF = "teachers";
+    public static final String COMPETENCY_REF = "Competencies";
 
     private static final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     
@@ -27,7 +28,7 @@ public class FirebaseHandler {
         return mUser != null;
     }
     
-    static Teacher generateMainTeacher(){
+    public static Teacher generateMainTeacher(){
         if(isMainUserAuthenticated()){
             Teacher teacher = new Teacher(mUser.getDisplayName());
             teacher = loadMainUserData(teacher);
@@ -77,14 +78,14 @@ public class FirebaseHandler {
         rootRef.child(TEACHER_REF).child(mUser.getUid()).setValue(teacher);
     }
 
-    static void updateMainUserData(Teacher teacher){
+    public static void updateMainUserData(Teacher teacher){
         if (isMainUserAuthenticated()){
             DatabaseReference userRef = rootRef.child(TEACHER_REF).child(mUser.getUid());
             userRef.setValue(teacher);
         }
     }
 
-    static String getUID() throws IllegalAccessException{
+    public static String getUID() throws IllegalAccessException{
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
         if(mUser != null){
@@ -94,7 +95,7 @@ public class FirebaseHandler {
         }
     }
 
-    static DatabaseReference getRootRef() {
+    public static DatabaseReference getRootRef() {
         return rootRef;
     }
 }

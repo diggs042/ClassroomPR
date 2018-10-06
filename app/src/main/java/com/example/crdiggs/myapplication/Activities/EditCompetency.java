@@ -1,4 +1,4 @@
-package com.example.crdiggs.myapplication;
+package com.example.crdiggs.myapplication.Activities;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -14,6 +14,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.crdiggs.myapplication.Controllers.FirebaseHandler;
+import com.example.crdiggs.myapplication.R;
+import com.example.crdiggs.myapplication.Models.SubCompetency;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

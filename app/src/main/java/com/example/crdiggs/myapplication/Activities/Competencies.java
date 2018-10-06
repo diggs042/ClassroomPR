@@ -1,4 +1,4 @@
-package com.example.crdiggs.myapplication;
+package com.example.crdiggs.myapplication.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +18,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.example.crdiggs.myapplication.Controllers.FirebaseHandler;
+import com.example.crdiggs.myapplication.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

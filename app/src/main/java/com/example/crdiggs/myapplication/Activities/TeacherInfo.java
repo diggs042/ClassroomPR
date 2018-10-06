@@ -1,4 +1,4 @@
-package com.example.crdiggs.myapplication;
+package com.example.crdiggs.myapplication.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.crdiggs.myapplication.Controllers.FirebaseHandler;
+import com.example.crdiggs.myapplication.R;
+import com.example.crdiggs.myapplication.Models.Teacher;
 
 public class TeacherInfo extends AppCompatActivity {
 
@@ -53,7 +57,7 @@ public class TeacherInfo extends AppCompatActivity {
                 }
 
 
-                startActivity(studentInfoIntent);
+                //startActivity(studentInfoIntent);
 
             }
         });
