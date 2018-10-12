@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Add Subcompetency"
+        android:id="@+id/add_subcompetency">
+    </item>
+
+    <item
+        android:title="Add Student"
+        android:id="@+id/add_student">
+    </item>
+</menu>
