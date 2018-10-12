@@ -10,11 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activities.MainMenu" />
         <activity android:name=".Activities.TeacherInfo" />
@@ -26,7 +21,13 @@
         <activity android:name=".Activities.Subcompetencies" />
         <activity android:name=".Activities.CompetencyList" />
         <activity android:name=".Activities.EditCompetency" />
-        <activity android:name=".Activities.StudentsAndCompetenciesActivity"></activity>
+        <activity android:name=".Activities.StudentsAndCompetenciesActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
